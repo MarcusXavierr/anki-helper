@@ -15,8 +15,16 @@ const (
 	colorGreen = "\033[32m"
 )
 
-func ReadFile(filePath string) string {
-	buffer, err := os.ReadFile(filePath)
+type File struct {
+	FilePath string
+}
+
+type IFile interface {
+	ReadFile() string
+}
+
+func (f File) ReadFile() string {
+	buffer, err := os.ReadFile(f.FilePath)
 	check.Check(err)
 	return string(buffer)
 }

@@ -6,6 +6,14 @@ import (
 	"testing"
 )
 
+type fakeFile struct {
+	FilePath string
+}
+
+func (f fakeFile) ReadFile() string {
+	return "this is\njust\ntesting"
+}
+
 func TestPrinting(t *testing.T) {
 	testFunction := func(t *testing.T, print func(io.Writer, string), color string) {
 
@@ -34,4 +42,12 @@ func validateString(got string, want string, t testing.TB) {
 	if got != want {
 		t.Errorf("Error printing, got %q want %q", got, want)
 	}
+}
+
+func TestReadFile(t *testing.T) {
+	f := fakeFile{FilePath: "testing"}
+	got := f.ReadFile()
+	want := "this is\njust\ntesting"
+
+	validateString(want, got, t)
 }

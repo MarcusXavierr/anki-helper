@@ -1,16 +1,22 @@
 package sentenceCheck
 
 import (
+	"bytes"
 	"testing"
 )
 
+type fakeTrashFile struct{}
+type fakeFile struct{}
+
+func (f fakeFile) ReadFile() string {
+	return "my\nfake\nfile"
+}
+
+func (f fakeTrashFile) ReadFile() string {
+	return "trash"
+}
+
 func TestSentenceComparation(t *testing.T) {
-	checkResultBool := func(t testing.TB, got, want bool) {
-		t.Helper()
-		if got != want {
-			t.Errorf("Error, want %t but got %t", want, got)
-		}
-	}
 	t.Run("Verifify without success if sentence exists on a string", func(t *testing.T) {
 		const want = false
 		got := verifyIsSentenceExists("test", "testing\nI don't know what I'm doing")
@@ -31,4 +37,28 @@ func TestSentenceComparation(t *testing.T) {
 		got = verifyIsSentenceExists("test", "testing\ntest\nnew test")
 		checkResultBool(t, got, want)
 	})
+}
+
+func TestCheckIfSentenceExists(t *testing.T) {
+	buffer := &bytes.Buffer{}
+	file, trashFile := fakeFile{}, fakeTrashFile{}
+
+	t.Run("sentence exists", func(t *testing.T) {
+		got := CheckIfSentenceExists(buffer, "my", file, trashFile)
+		want := true
+		checkResultBool(t, got, want)
+	})
+
+	t.Run("sentence dont exists", func(t *testing.T) {
+		got := CheckIfSentenceExists(buffer, "testing", file, trashFile)
+		want := false
+		checkResultBool(t, got, want)
+	})
+}
+
+func checkResultBool(t testing.TB, got bool, want bool) {
+	t.Helper()
+	if got != want {
+		t.Errorf("Error, want %t but got %t", want, got)
+	}
 }

@@ -33,15 +33,15 @@ var addCmd = &cobra.Command{
 	},
 }
 
-func saveSentence(sentence string, wordsTrackerFile string, trash string) {
+func saveSentence(sentence string, wordsTrackerFile, trash IO.File) {
 	if !sentenceCheck.CheckIfSentenceExists(os.Stdout, sentence, wordsTrackerFile, trash) {
-		writeSentenceOnFile(sentence, wordsTrackerFile)
+		writeSentenceOnFile(sentence, wordsTrackerFile.FilePath)
 	}
 }
 
-func getFiles() (string, string) {
-	wordsTrackerFile := IO.GetHomeDir() + "/english_words/words.txt"
-	trash := IO.GetHomeDir() + "/english_words/trash.txt"
+func getFiles() (IO.File, IO.File) {
+	wordsTrackerFile := IO.File{FilePath: IO.GetHomeDir() + "/english_words/words.txt"}
+	trash := IO.File{FilePath: IO.GetHomeDir() + "/english_words/trash.txt"}
 	return wordsTrackerFile, trash
 }
 

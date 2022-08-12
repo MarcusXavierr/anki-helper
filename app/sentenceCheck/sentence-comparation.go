@@ -8,10 +8,10 @@ import (
 	"github.com/MarcusXavierr/anki-helper/app/IO"
 )
 
-func CheckIfSentenceExists(out io.Writer, sentence string, filePathList ...string) bool {
-	for _, filePath := range filePathList {
-		if hasSentence(sentence, filePath) {
-			message := fmt.Sprintf("sentence %q already exists on file %s", sentence, filePath)
+func CheckIfSentenceExists(out io.Writer, sentence string, files ...IO.IFile) bool {
+	for _, file := range files {
+		if hasSentence(sentence, file) {
+			message := fmt.Sprintf("sentence %q already exists on file %s", sentence, file)
 			IO.PrintRed(out, message)
 			return true
 		}
@@ -19,8 +19,8 @@ func CheckIfSentenceExists(out io.Writer, sentence string, filePathList ...strin
 	return false
 }
 
-func hasSentence(sentence, filePath string) bool {
-	buffer := IO.ReadFile(filePath)
+func hasSentence(sentence string, file IO.IFile) bool {
+	buffer := file.ReadFile()
 	return verifyIsSentenceExists(sentence, buffer)
 }
 

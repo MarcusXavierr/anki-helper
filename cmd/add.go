@@ -23,6 +23,7 @@ var addCmd = &cobra.Command{
 
 		if len(args) < 1 || len(args) > 1 {
 			IO.PrintRed(os.Stdout, "this function only takes on argument")
+			os.Exit(2)
 		}
 
 		wordsTrackerFile, trash := getFiles()

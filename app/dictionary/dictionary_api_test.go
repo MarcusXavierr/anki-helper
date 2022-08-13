@@ -19,14 +19,14 @@ func makeFakeServer(status int, response []byte) *httptest.Server {
 
 }
 func TestGetDefinition(t *testing.T) {
-	createResponse := func(defition, example, word string) Response {
+	createResponse := func(defition, example, word string) DictionaryApiResponse {
 		definition := Definition{
 			Def:     defition,
 			Example: example,
 		}
 		noumMeaning := Meaning{PartOfSpeech: "noun", Definitions: []Definition{}}
 		verbMeaning := Meaning{PartOfSpeech: "verb", Definitions: []Definition{definition}}
-		return Response{Word: word, Meanings: []Meaning{noumMeaning, verbMeaning}}
+		return DictionaryApiResponse{Word: word, Meanings: []Meaning{noumMeaning, verbMeaning}}
 	}
 
 	t.Run("Test cringe", func(t *testing.T) {
@@ -37,7 +37,7 @@ func TestGetDefinition(t *testing.T) {
 			"He cringed as the bird collided with the window.",
 			"cringe",
 		)
-		want := []Response{response}
+		want := []DictionaryApiResponse{response}
 		compareStructs(t, got, want)
 
 	})

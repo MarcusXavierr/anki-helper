@@ -8,7 +8,7 @@ import (
 	"github.com/MarcusXavierr/anki-helper/app/IO"
 )
 
-type Response struct {
+type DictionaryApiResponse struct {
 	Word     string
 	Meanings []Meaning `json:"meanings"`
 }
@@ -30,10 +30,10 @@ func GetDefinition(word, url string) (interface{}, error) {
 func parser(input io.Reader, status int) (interface{}, error) {
 	body, err := ioutil.ReadAll(input)
 	if err != nil {
-		return Response{}, err
+		return DictionaryApiResponse{}, err
 	}
 
-	var response []Response
+	var response []DictionaryApiResponse
 	json.Unmarshal(body, &response)
 	return response, nil
 

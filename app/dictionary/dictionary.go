@@ -23,14 +23,14 @@ type Definition struct {
 	Example string
 }
 
-func GetDefinition(word, url string) (interface{}, error) {
+func GetDefinition(word, url string) ([]DictionaryApiResponse, error) {
 	return IO.HttpGetDictionary(parser, url)
 }
 
-func parser(input io.Reader, status int) (interface{}, error) {
+func parser(input io.Reader, status int) ([]DictionaryApiResponse, error) {
 	body, err := ioutil.ReadAll(input)
 	if err != nil {
-		return DictionaryApiResponse{}, err
+		return []DictionaryApiResponse{}, err
 	}
 
 	var response []DictionaryApiResponse

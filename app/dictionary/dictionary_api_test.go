@@ -51,7 +51,7 @@ func TestGetDefinition(t *testing.T) {
 	})
 }
 
-func compareStructs(t testing.TB, got, want interface{}) {
+func compareStructs(t testing.TB, got, want []DictionaryApiResponse) {
 	t.Helper()
 	if !reflect.DeepEqual(got, want) {
 		t.Errorf("got %v want %v", got, want)

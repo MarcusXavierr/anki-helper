@@ -32,10 +32,12 @@ var addCmd = &cobra.Command{
 		if definition {
 			url := "https://api.dictionaryapi.dev/api/v2/entries/en/" + args[0]
 			response, err := dictionary.GetDefinition(url)
-			if err != nil {
-				panic(err)
+			if err == IO.NotFoundError {
+				IO.PrintRed(os.Stdout, "word not found on dictionary api\n\n")
 			}
-			PrettyPrintDefinition(response.Normalize())
+			if err == nil {
+				PrettyPrintDefinition(response.Normalize())
+			}
 		}
 
 		wordsTrackerFile, trash := getFiles()

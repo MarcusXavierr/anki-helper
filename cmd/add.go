@@ -82,6 +82,7 @@ func PrettyPrintDefinition(response dictionary.DictionaryApiResponse) {
 	IO.PrintGreen(os.Stdout, fmt.Sprintf("result for word %s\n\n", response.Word))
 	for _, meaning := range response.Meanings {
 		if len(meaning.Definitions) > 0 {
+			rand.Seed(time.Now().UnixNano())
 			randomIndex := rand.Intn(len(meaning.Definitions))
 			def := meaning.Definitions[randomIndex]
 			IO.PrintGreen(

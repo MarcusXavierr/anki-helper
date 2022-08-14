@@ -11,7 +11,7 @@ import (
 func CheckIfSentenceExists(out io.Writer, sentence string, files ...IO.IFile) bool {
 	for _, file := range files {
 		if hasSentence(sentence, file) {
-			message := fmt.Sprintf("sentence %q already exists on file %s", sentence, file)
+			message := fmt.Sprintf("sentence %q already exists on file %s\n", sentence, file)
 			IO.PrintRed(out, message)
 			return true
 		}

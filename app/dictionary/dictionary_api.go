@@ -24,7 +24,7 @@ type Definition struct {
 	Example string
 }
 
-func GetDefinition(word, url string) (DictionaryApiResponse, error) {
+func GetDefinition(url string) (DictionaryApiResponse, error) {
 	return IO.HttpGetDictionary(parser, url)
 }
 

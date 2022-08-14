@@ -58,3 +58,8 @@ func usage() {
 	flag.PrintDefaults()
 	os.Exit(2)
 }
+
+func init() {
+	rootCmd.AddCommand(addCmd)
+	rootCmd.PersistentFlags().BoolP("definition", "d", false, "")
+}

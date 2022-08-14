@@ -44,9 +44,9 @@ func GetHomeDir() string {
 }
 
 func PrintRed(out io.Writer, message string) {
-	fmt.Fprintln(out, string(colorRed), message, string(colorReset))
+	fmt.Fprint(out, string(colorRed), message, string(colorReset))
 }
 
 func PrintGreen(out io.Writer, message string) {
-	fmt.Fprintln(out, string(colorGreen), message, string(colorReset))
+	fmt.Fprint(out, string(colorGreen), message, string(colorReset))
 }

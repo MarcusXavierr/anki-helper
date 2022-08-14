@@ -7,10 +7,12 @@ package cmd
 import (
 	"flag"
 	"fmt"
+	"math/rand"
 	"os"
 
 	"github.com/MarcusXavierr/anki-helper/app/IO"
 	"github.com/MarcusXavierr/anki-helper/app/check"
+	"github.com/MarcusXavierr/anki-helper/app/dictionary"
 	"github.com/MarcusXavierr/anki-helper/app/sentenceCheck"
 	"github.com/spf13/cobra"
 )
@@ -20,10 +22,20 @@ var addCmd = &cobra.Command{
 	Use:   "add [sentence]",
 	Short: "Adds a new word or sentence you learned",
 	Run: func(cmd *cobra.Command, args []string) {
+		definition, _ := cmd.Flags().GetBool("definition")
 
 		if len(args) < 1 || len(args) > 1 {
 			IO.PrintRed(os.Stdout, "this function only takes on argument")
 			os.Exit(2)
+		}
+
+		if definition {
+			url := "https://api.dictionaryapi.dev/api/v2/entries/en/" + args[0]
+			response, err := dictionary.GetDefinition(url)
+			if err != nil {
+				panic(err)
+			}
+			PrettyPrintDefinition(response.Normalize())
 		}
 
 		wordsTrackerFile, trash := getFiles()
@@ -62,4 +74,19 @@ func usage() {
 func init() {
 	rootCmd.AddCommand(addCmd)
 	rootCmd.PersistentFlags().BoolP("definition", "d", false, "")
+}
+
+func PrettyPrintDefinition(response dictionary.DictionaryApiResponse) {
+	IO.PrintGreen(os.Stdout, fmt.Sprintf("result for word %s\n\n", response.Word))
+	for _, meaning := range response.Meanings {
+		if len(meaning.Definitions) > 0 {
+			randomIndex := rand.Intn(len(meaning.Definitions))
+			def := meaning.Definitions[randomIndex]
+			IO.PrintGreen(
+				os.Stdout,
+				fmt.Sprintf("%s\nDefinition: %s\nExample: %s\n\n", meaning.PartOfSpeech, def.Def, def.Example),
+			)
+		}
+	}
+
 }

@@ -31,7 +31,7 @@ func TestGetDefinition(t *testing.T) {
 
 	t.Run("Test cringe", func(t *testing.T) {
 		server := makeFakeServer(200, []byte(cringeDefinition))
-		got, _ := GetDefinition("cringe", server.URL)
+		got, _ := GetDefinition(server.URL)
 		response := createResponse(
 			"To shrink, cower, tense or recoil, as in fear, disgust or embarrassment.",
 			"He cringed as the bird collided with the window.",
@@ -44,7 +44,7 @@ func TestGetDefinition(t *testing.T) {
 
 	t.Run("word dont exists", func(t *testing.T) {
 		server := makeFakeServer(404, []byte("I dont know"))
-		_, err := GetDefinition("asdf", server.URL)
+		_, err := GetDefinition(server.URL)
 		if err != IO.NotFoundError {
 			t.Errorf("got %q want %q", err, IO.NotFoundError)
 		}

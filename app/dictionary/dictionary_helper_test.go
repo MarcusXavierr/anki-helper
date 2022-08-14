@@ -41,3 +41,34 @@ func TestCleanMeaningResults(t *testing.T) {
 		validateStructs(t, got, want)
 	})
 }
+
+func TestNormalize(t *testing.T) {
+	md := func(definition, example string) Definition {
+		return Definition{definition, example}
+	}
+
+	t.Run("normal test", func(t *testing.T) {
+		response := makeResponse([]Meaning{
+			makeMeaning([]Definition{md("", "")}, "verb"),
+			makeMeaning([]Definition{md("test", "testing")}, "noun"),
+		}, "word")
+
+		got := response.Normalize()
+
+		want := DictionaryApiResponse{Word: "word", Meanings: []Meaning{
+			Meaning{PartOfSpeech: "noun", Definitions: []Definition{
+				Definition{Def: "test", Example: "testing"}},
+			},
+		}}
+
+		compareStructs(t, got, want)
+	})
+}
+func makeResponse(meanings []Meaning, word string) DictionaryApiResponse {
+	return DictionaryApiResponse{Word: word, Meanings: meanings}
+}
+
+func makeMeaning(definitions []Definition, partOfSpeech string) Meaning {
+	verbMeaning := Meaning{PartOfSpeech: partOfSpeech, Definitions: definitions}
+	return verbMeaning
+}

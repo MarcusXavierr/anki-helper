@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"math/rand"
 	"os"
+	"time"
 
 	"github.com/MarcusXavierr/anki-helper/app/IO"
 	"github.com/MarcusXavierr/anki-helper/app/check"

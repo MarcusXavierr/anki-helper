@@ -36,7 +36,7 @@ func TestCleanMeaningResults(t *testing.T) {
 	t.Run("return empty definition array", func(t *testing.T) {
 		meaning := Meaning{PartOfSpeech: "noun", Definitions: []Definition{md("", "example"), md("test", "")}}
 		got := CleanMeaningResults(meaning)
-		want := Meaning{PartOfSpeech: "noun", Definitions: []Definition{}}
+		want := Meaning{PartOfSpeech: "noun", Definitions: []Definition{md("test", "")}}
 
 		validateStructs(t, got, want)
 	})
@@ -59,6 +59,25 @@ func TestNormalize(t *testing.T) {
 			Meaning{PartOfSpeech: "noun", Definitions: []Definition{
 				Definition{Def: "test", Example: "testing"}},
 			},
+		}}
+
+		compareStructs(t, got, want)
+	})
+
+	t.Run("should take first definition of a partOfSpeech if all examples are null", func(t *testing.T) {
+		response := makeResponse([]Meaning{
+			makeMeaning([]Definition{md("to test something", ""), md("test", "")}, "noun"),
+			makeMeaning([]Definition{md("just test", ""), md("test", "")}, "verb"),
+		}, "testing")
+
+		got := response.Normalize()
+		want := DictionaryApiResponse{Word: "testing", Meanings: []Meaning{
+			Meaning{PartOfSpeech: "noun", Definitions: []Definition{
+				Definition{Def: "to test something", Example: ""},
+			}},
+			Meaning{PartOfSpeech: "verb", Definitions: []Definition{
+				Definition{Def: "just test", Example: ""},
+			}},
 		}}
 
 		compareStructs(t, got, want)

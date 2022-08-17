@@ -34,10 +34,8 @@ func PrintResults(word string) {
 		fmt.Println(meaning.PartOfSpeech)
 		fmt.Println("-------------------------------------------------")
 		for _, definition := range meaning.Definitions {
-			if definition.Example != "" {
-				IO.PrintGreen(os.Stdout, fmt.Sprintf("Definition: %q\n", definition.Def))
-				IO.PrintRed(os.Stdout, fmt.Sprintf("Example: %q\n\n", definition.Example))
-			}
+			IO.PrintGreen(os.Stdout, fmt.Sprintf("Definition: %q\n", definition.Def))
+			IO.PrintRed(os.Stdout, fmt.Sprintf("Example: %q\n\n", definition.Example))
 		}
 		fmt.Println("-------------------------------------------------")
 	}

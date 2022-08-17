@@ -22,7 +22,7 @@ func TestPrinting(t *testing.T) {
 		print(buffer, message)
 
 		got := buffer.String()
-		want := string(color) + " testing message " + string(colorReset) + "\n"
+		want := string(color) + "testing message" + string(colorReset)
 
 		validateString(got, want, t)
 	}

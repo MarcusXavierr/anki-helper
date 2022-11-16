@@ -1,6 +1,6 @@
 # Anki Helper
 
-This application aims to allow the user to track the words he learns in a language, so that he can put these words in anki
+This application aims to allow the user to track the words he learns in a language, so that they can put these words in anki
 
 ## Installation
 you can install this project with go

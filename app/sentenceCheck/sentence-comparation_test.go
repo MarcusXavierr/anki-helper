@@ -17,26 +17,33 @@ func (f fakeTrashFile) ReadFile() string {
 }
 
 func TestSentenceComparation(t *testing.T) {
-	t.Run("Verifify without success if sentence exists on a string", func(t *testing.T) {
-		const want = false
+	const want = false
+	t.Run("Should return null if substring doesn't belongs to string", func(t *testing.T) {
 		got := verifyIsSentenceExists("test", "testing\nI don't know what I'm doing")
-		checkResultBool(t, got, want)
-
-		got = verifyIsSentenceExists("test", "")
-		checkResultBool(t, got, want)
-
-		got = verifyIsSentenceExists("", "testing")
-		checkResultBool(t, got, want)
+		checkResult(t, got, want)
 	})
 
+	t.Run("should return false if string is empty", func(t *testing.T) {
+		got := verifyIsSentenceExists("test", "")
+		checkResult(t, got, want)
+	})
+
+	t.Run("Should return false if substring is empty", func(t *testing.T) {
+		got := verifyIsSentenceExists("", "testing")
+		checkResult(t, got, want)
+	})
+}
+
+func TestTrueSentenceComparation(t *testing.T) {
 	t.Run("Verifify with success if sentence exists on string", func(t *testing.T) {
 		const want = true
 		got := verifyIsSentenceExists("test", "test")
-		checkResultBool(t, got, want)
+		checkResult(t, got, want)
 
 		got = verifyIsSentenceExists("test", "testing\ntest\nnew test")
-		checkResultBool(t, got, want)
+		checkResult(t, got, want)
 	})
+
 }
 
 func TestCheckIfSentenceExists(t *testing.T) {
@@ -46,17 +53,17 @@ func TestCheckIfSentenceExists(t *testing.T) {
 	t.Run("sentence exists", func(t *testing.T) {
 		got := CheckIfSentenceExists(buffer, "my", file, trashFile)
 		want := true
-		checkResultBool(t, got, want)
+		checkResult(t, got, want)
 	})
 
 	t.Run("sentence dont exists", func(t *testing.T) {
 		got := CheckIfSentenceExists(buffer, "testing", file, trashFile)
 		want := false
-		checkResultBool(t, got, want)
+		checkResult(t, got, want)
 	})
 }
 
-func checkResultBool(t testing.TB, got bool, want bool) {
+func checkResult(t testing.TB, got bool, want bool) {
 	t.Helper()
 	if got != want {
 		t.Errorf("Error, want %t but got %t", want, got)

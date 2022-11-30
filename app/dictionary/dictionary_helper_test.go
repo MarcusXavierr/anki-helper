@@ -75,8 +75,8 @@ func TestNormalize(t *testing.T) {
 			Meaning{PartOfSpeech: "noun", Definitions: []Definition{
 				Definition{Def: "to test something", Example: ""},
 			}},
-			Meaning{PartOfSpeech: "verb", Definitions: []Definition{
-				Definition{Def: "just test", Example: ""},
+			{PartOfSpeech: "verb", Definitions: []Definition{
+				{Def: "just test", Example: ""},
 			}},
 		}}
 

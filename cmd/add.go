@@ -23,32 +23,35 @@ var addCmd = &cobra.Command{
 	Use:   "add [sentence]",
 	Short: "Adds a new word or sentence you learned",
 	Run: func(cmd *cobra.Command, args []string) {
-		definition, _ := cmd.Flags().GetBool("definition")
-
-		if len(args) < 1 || len(args) > 1 {
-			IO.PrintRed(os.Stdout, "this function only takes on argument")
-			os.Exit(2)
-		}
-
-		if definition {
-			url := "https://api.dictionaryapi.dev/api/v2/entries/en/" + args[0]
-			response, err := dictionary.GetDefinition(url)
-			if err == IO.NotFoundError {
-				IO.PrintRed(os.Stdout, "word not found on dictionary api\n\n")
-			}
-			if err == nil {
-				PrettyPrintDefinition(response.Normalize())
-			}
-		}
-
-		wordsTrackerFile, trash := getFiles()
-		sentence := args[0]
-
-		saveSentence(sentence, wordsTrackerFile, trash)
+		saveSentenceAndPrintDefinition(cmd, args)
 	},
 }
 
-func saveSentence(sentence string, wordsTrackerFile, trash IO.File) {
+func saveSentenceAndPrintDefinition(cmd *cobra.Command, args []string) {
+	definition, _ := cmd.Flags().GetBool("definition")
+	sentence := getSentenceFromArgs(args)
+
+	if definition {
+		printDefinition(sentence)
+	}
+
+	saveSentence(sentence)
+}
+
+func printDefinition(sentence string) {
+	url := "https://api.dictionaryapi.dev/api/v2/entries/en/" + sentence
+	response, err := dictionary.GetDefinition(url)
+	if err == IO.NotFoundError {
+		IO.PrintRed(os.Stdout, "word not found on dictionary api\n\n")
+	}
+	if err == nil {
+		PrettyPrintDefinition(response.Normalize())
+	}
+}
+
+func saveSentence(sentence string) {
+	wordsTrackerFile, trash := getFiles()
+
 	if !sentenceCheck.CheckIfSentenceExists(os.Stdout, sentence, wordsTrackerFile, trash) {
 		writeSentenceOnFile(sentence, wordsTrackerFile.FilePath)
 	}
@@ -77,6 +80,16 @@ func usage() {
 func init() {
 	rootCmd.AddCommand(addCmd)
 	rootCmd.PersistentFlags().BoolP("definition", "d", false, "")
+}
+
+func getSentenceFromArgs(args []string) string {
+
+	if len(args) < 1 || len(args) > 1 {
+		IO.PrintRed(os.Stdout, "this function only takes on argument")
+		os.Exit(2)
+	}
+	sentence := args[0]
+	return sentence
 }
 
 func PrettyPrintDefinition(response dictionary.DictionaryApiResponse) {

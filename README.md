@@ -1,5 +1,8 @@
 # Anki Helper
+[![Go Report Card](https://goreportcard.com/badge/github.com/MarcusXavierr/anki-helper)](https://goreportcard.com/report/github.com/MarcusXavierr/anki-helper)
+![example workflow](https://github.com/MarcusXavierr/anki-helper/actions/workflows/go.yml/badge.svg)
 
+<br/>
 This application aims to allow the user to track the words he learns in a language, so that they can put these words in anki
 
 ## Installation

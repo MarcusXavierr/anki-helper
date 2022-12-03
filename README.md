@@ -15,7 +15,7 @@ There are two ways to pass the path of these files to the cli. You can pass thes
 Here, I'll show the two ways to set your anki helper storage file paths. Remember to use your own paths.
 
 #### Using flags
-Setting your storage file paths with flags is pretty easy. Just use `-n` in the file where you'll store unknown sentences, and -t to store learned sentences.
+Setting your storage file paths with flags is pretty easy. Just use `-n` in the file where you'll store unknown sentences, and `-t` to store learned sentences.
 
 ```bash
 anki-helper add "unknown sentence" -n "/tmp/new_sentences_file.txt" -t "/tmp/learned_sentences_file.txt"

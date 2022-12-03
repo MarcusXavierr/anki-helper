@@ -12,6 +12,11 @@ import (
 	"github.com/MarcusXavierr/anki-helper/app/dictionary"
 )
 
+type UserFilePath struct {
+	WriteFile string
+	TrashFile string
+}
+
 func PrettyPrintDefinition(response dictionary.DictionaryApiResponse) {
 	IO.PrintGreen(os.Stdout, fmt.Sprintf("result for word %s\n\n", response.Word))
 	for _, meaning := range response.Meanings {

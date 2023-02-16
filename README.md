@@ -3,7 +3,7 @@
 ![example workflow](https://github.com/MarcusXavierr/anki-helper/actions/workflows/go.yml/badge.svg)
 
 <br/>
-This application aims to enable users to track the new words they learn in a foreign language, so that they can add them to Anki for further practice and memorization.
+Track new words you learn in a foreign language and add them to Anki for further practice and memorization. 
 
 An example of usage is shown below:
 

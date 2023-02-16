@@ -13,6 +13,8 @@ const (
 	colorReset = "\033[0m"
 	colorRed   = "\033[31m"
 	colorGreen = "\033[32m"
+	colorCyan  = "\033[36m"
+	colorPink  = "\033[38;5;205m"
 )
 
 type File struct {
@@ -49,4 +51,16 @@ func PrintRed(out io.Writer, message string) {
 
 func PrintGreen(out io.Writer, message string) {
 	fmt.Fprint(out, string(colorGreen), message, string(colorReset))
+}
+
+func PrintCyan(out io.Writer, message string) {
+	fmt.Fprint(out, string(colorCyan), message, string(colorReset))
+}
+
+func PrintPink(out io.Writer, message string) {
+	fmt.Fprint(out, string(colorPink), message, string(colorReset))
+}
+
+func PrintWithColor(out io.Writer, message, color string) {
+	fmt.Fprint(out, color, message, string(colorReset))
 }

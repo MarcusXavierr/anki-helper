@@ -21,10 +21,10 @@ func CheckIfSentenceExists(out io.Writer, sentence string, files ...IO.IFile) bo
 
 func hasSentence(sentence string, file IO.IFile) bool {
 	buffer := file.ReadFile()
-	return verifyIsSentenceExists(sentence, buffer)
+	return verifyIfSentenceExists(sentence,buffer)
 }
 
-func verifyIsSentenceExists(sentence, buffer string) bool {
+func verifyIfSentenceExists(sentence, buffer string) bool {
 	var allLines []string = strings.Split(buffer, "\n")
 	for line := range allLines {
 		if compareStrings(sentence, allLines[line]) {

@@ -19,17 +19,17 @@ func (f fakeTrashFile) ReadFile() string {
 func TestSentenceComparation(t *testing.T) {
 	const want = false
 	t.Run("Should return null if substring doesn't belongs to string", func(t *testing.T) {
-		got := verifyIsSentenceExists("test", "testing\nI don't know what I'm doing")
+		got := verifyIfSentenceExists("test", "testing\nI don't know what I'm doing")
 		checkResult(t, got, want)
 	})
 
 	t.Run("should return false if string is empty", func(t *testing.T) {
-		got := verifyIsSentenceExists("test", "")
+		got := verifyIfSentenceExists("test", "")
 		checkResult(t, got, want)
 	})
 
 	t.Run("Should return false if substring is empty", func(t *testing.T) {
-		got := verifyIsSentenceExists("", "testing")
+		got := verifyIfSentenceExists("", "testing")
 		checkResult(t, got, want)
 	})
 }
@@ -37,10 +37,10 @@ func TestSentenceComparation(t *testing.T) {
 func TestTrueSentenceComparation(t *testing.T) {
 	t.Run("Verifify with success if sentence exists on string", func(t *testing.T) {
 		const want = true
-		got := verifyIsSentenceExists("test", "test")
+		got := verifyIfSentenceExists("test", "test")
 		checkResult(t, got, want)
 
-		got = verifyIsSentenceExists("test", "testing\ntest\nnew test")
+		got = verifyIfSentenceExists("test", "testing\ntest\nnew test")
 		checkResult(t, got, want)
 	})
 

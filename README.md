@@ -5,6 +5,8 @@
 <br/>
 This application aims to allow the user to track the words he learns in a language, so that they can put these words in anki
 
+<img width="1049" alt="image" src="https://user-images.githubusercontent.com/59923581/219258940-86583cb9-6cc4-4cf0-af9e-b8e98472a540.png">
+
 ## Installation
 you can install this project with go
 ```bash

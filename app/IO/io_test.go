@@ -22,17 +22,17 @@ func TestPrinting(t *testing.T) {
 		print(buffer, message)
 
 		got := buffer.String()
-		want := string(color) + "testing message" + string(colorReset)
+		want := string(color) + "testing message" + string(ColorReset)
 
 		validateString(got, want, t)
 	}
 
 	t.Run("test red", func(t *testing.T) {
-		testFunction(t, PrintRed, colorRed)
+		testFunction(t, PrintRed, ColorRed)
 	})
 
 	t.Run("test gree", func(t *testing.T) {
-		testFunction(t, PrintGreen, colorGreen)
+		testFunction(t, PrintGreen, ColorGreen)
 	})
 }
 

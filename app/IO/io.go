@@ -10,11 +10,12 @@ import (
 )
 
 const (
-	colorReset = "\033[0m"
-	colorRed   = "\033[31m"
-	colorGreen = "\033[32m"
-	colorCyan  = "\033[36m"
-	colorPink  = "\033[38;5;205m"
+	ColorReset = "\033[0m"
+	ColorRed   = "\033[31m"
+	ColorGreen = "\033[32m"
+	ColorCyan  = "\033[36m"
+	ColorPink  = "\033[38;5;205m"
+	ColorGold  = "\033[38;2;243;134;48m"
 )
 
 type File struct {
@@ -46,21 +47,13 @@ func GetHomeDir() string {
 }
 
 func PrintRed(out io.Writer, message string) {
-	fmt.Fprint(out, string(colorRed), message, string(colorReset))
+	fmt.Fprint(out, string(ColorRed), message, string(ColorReset))
 }
 
 func PrintGreen(out io.Writer, message string) {
-	fmt.Fprint(out, string(colorGreen), message, string(colorReset))
-}
-
-func PrintCyan(out io.Writer, message string) {
-	fmt.Fprint(out, string(colorCyan), message, string(colorReset))
-}
-
-func PrintPink(out io.Writer, message string) {
-	fmt.Fprint(out, string(colorPink), message, string(colorReset))
+	fmt.Fprint(out, string(ColorGreen), message, string(ColorReset))
 }
 
 func PrintWithColor(out io.Writer, message, color string) {
-	fmt.Fprint(out, color, message, string(colorReset))
+	fmt.Fprint(out, color, message, string(ColorReset))
 }

@@ -9,7 +9,6 @@ import (
 	"os"
 
 	"github.com/MarcusXavierr/anki-helper/app/IO"
-	"github.com/MarcusXavierr/anki-helper/app/dictionary"
 	"github.com/MarcusXavierr/anki-helper/app/sentenceCheck"
 	"github.com/MarcusXavierr/anki-helper/app/utils"
 	"github.com/spf13/cobra"
@@ -48,9 +47,7 @@ func saveSentenceAndPrintDefinition(cmd *cobra.Command, args []string, userFiles
 	sentence := getSentenceFromArgs(args)
 
 	if definition {
-		// printDefinition(sentence)
 		printWiktionaryDefinition(sentence)
-
 	}
 
 	saveSentence(sentence, userFiles)
@@ -65,16 +62,6 @@ func printWiktionaryDefinition(sentence string) {
 
 	if err == nil {
 		utils.PrintWiktionary(resp, sentence)
-	}
-}
-func printDefinition(sentence string) {
-	url := "https://api.dictionaryapi.dev/api/v2/entries/en/" + sentence
-	response, err := dictionary.GetDefinition(url)
-	if err == IO.NotFoundError {
-		IO.PrintRed(os.Stdout, "word not found on dictionary api\n\n")
-	}
-	if err == nil {
-		utils.PrettyPrintDefinition(response.Normalize())
 	}
 }
 

@@ -3,7 +3,9 @@
 ![example workflow](https://github.com/MarcusXavierr/anki-helper/actions/workflows/go.yml/badge.svg)
 
 <br/>
-This application aims to allow the user to track the words he learns in a language, so that they can put these words in anki
+This application aims to enable users to track the new words they learn in a foreign language, so that they can add them to Anki for further practice and memorization.
+
+An example of usage is shown below:
 
 <img width="1049" alt="image" src="https://user-images.githubusercontent.com/59923581/219258940-86583cb9-6cc4-4cf0-af9e-b8e98472a540.png">
 
@@ -13,8 +15,13 @@ you can install this project with go
 go install github.com/MarcusXavierr/anki-helper@latest
 ```
 ## Configuration
-You need to provide two files to the cli, one to save the sentences you've yet to learn and put in anki, and another to store the sentences you've already put in anki.
-There are two ways to pass the path of these files to the cli. You can pass these as flags to every command you make. Or you can configure a file called .anki-config that will be in your home folder.
+To use the CLI, you must provide two files: one to save the sentences you have yet to learn and add to Anki, and another to store the sentences you have already added to Anki.
+
+There are two ways to specify the file paths in the CLI. You can pass them as flags with every command you run, or you can configure a file called .anki-config in your home folder.
+
+The .anki-config file allows you to set default options for the CLI, including the file paths for the sentences you have yet to learn and the sentences you have already added to Anki. By using this file, you can avoid passing the file paths as flags with every command, which can be useful if you frequently use the same file paths.
+
+Overall, the CLI offers flexibility in how you choose to provide the file paths, making it easy for you to use it in the way that best fits your needs.
 
 ### Configuration storage file paths
 Here, I'll show the two ways to set your anki helper storage file paths. Remember to use your own paths.

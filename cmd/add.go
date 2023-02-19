@@ -8,9 +8,9 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/MarcusXavierr/anki-helper/internal/utils"
 	"github.com/MarcusXavierr/anki-helper/pkg/IO"
 	"github.com/MarcusXavierr/anki-helper/pkg/sentenceCheck"
-	"github.com/MarcusXavierr/anki-helper/pkg/utils"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"

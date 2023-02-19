@@ -6,7 +6,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/MarcusXavierr/anki-helper/app/IO"
+	"github.com/MarcusXavierr/anki-helper/pkg/IO"
 )
 
 const wordDefinition = "[{\"word\":\"cringe\",\"phonetic\":\"/kɹɪnd͡ʒ/\",\"phonetics\":[{\"text\":\"/kɹɪnd͡ʒ/\",\"audio\":\"https://api.dictionaryapi.dev/media/pronunciations/en/cringe-us.mp3\",\"sourceUrl\":\"https://commons.wikimedia.org/w/index.php?curid=5049283\",\"license\":{\"name\":\"BY-SA 3.0\",\"url\":\"https://creativecommons.org/licenses/by-sa/3.0\"}}],\"meanings\":[{\"partOfSpeech\":\"noun\",\"definitions\":[],\"synonyms\":[],\"antonyms\":[]},{\"partOfSpeech\":\"verb\",\"definitions\":[{\"definition\":\"To shrink, cower, tense or recoil, as in fear, disgust or embarrassment.\",\"synonyms\":[],\"antonyms\":[],\"example\":\"He cringed as the bird collided with the window.\"}],\"synonyms\":[],\"antonyms\":[]}],\"license\":{\"name\":\"CC BY-SA 3.0\",\"url\":\"https://creativecommons.org/licenses/by-sa/3.0\"},\"sourceUrls\":[\"https://en.wiktionary.org/wiki/cringe\"]}]"

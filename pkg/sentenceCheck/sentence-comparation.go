@@ -5,7 +5,7 @@ import (
 	"io"
 	"strings"
 
-	"github.com/MarcusXavierr/anki-helper/app/IO"
+	"github.com/MarcusXavierr/anki-helper/pkg/IO"
 )
 
 func CheckIfSentenceExists(out io.Writer, sentence string, files ...IO.IFile) bool {
@@ -21,7 +21,7 @@ func CheckIfSentenceExists(out io.Writer, sentence string, files ...IO.IFile) bo
 
 func hasSentence(sentence string, file IO.IFile) bool {
 	buffer := file.ReadFile()
-	return verifyIfSentenceExists(sentence,buffer)
+	return verifyIfSentenceExists(sentence, buffer)
 }
 
 func verifyIfSentenceExists(sentence, buffer string) bool {

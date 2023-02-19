@@ -6,7 +6,7 @@ import (
 	"os"
 	"os/user"
 
-	"github.com/MarcusXavierr/anki-helper/app/check"
+	"github.com/MarcusXavierr/anki-helper/pkg/check"
 )
 
 const (

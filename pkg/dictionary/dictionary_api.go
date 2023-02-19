@@ -6,7 +6,7 @@ import (
 	"io"
 	"io/ioutil"
 
-	"github.com/MarcusXavierr/anki-helper/app/IO"
+	"github.com/MarcusXavierr/anki-helper/pkg/IO"
 )
 
 type DictionaryApiResponse struct {

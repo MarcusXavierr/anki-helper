@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/MarcusXavierr/anki-helper/app/IO"
-	"github.com/MarcusXavierr/anki-helper/app/check"
+	"github.com/MarcusXavierr/anki-helper/pkg/IO"
+	"github.com/MarcusXavierr/anki-helper/pkg/check"
 	"github.com/MarcusXavierr/wiktionary-scraper/pkg/scraper"
 	"github.com/samber/lo"
 )

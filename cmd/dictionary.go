@@ -9,8 +9,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/MarcusXavierr/anki-helper/app/IO"
-	"github.com/MarcusXavierr/anki-helper/app/dictionary"
+	"github.com/MarcusXavierr/anki-helper/pkg/IO"
+	"github.com/MarcusXavierr/anki-helper/pkg/dictionary"
 	"github.com/spf13/cobra"
 )
 

@@ -5,8 +5,6 @@ import (
 	"io"
 	"os"
 	"os/user"
-
-	"github.com/MarcusXavierr/anki-helper/pkg/check"
 )
 
 const (
@@ -28,32 +26,38 @@ type IFile interface {
 
 func (f File) ReadFile() string {
 	buffer, err := os.ReadFile(f.FilePath)
-	check.Check(err)
+	check(err)
 	return string(buffer)
 }
 
 func WriteFile(sentence, filepath string) error {
 	file, e := os.OpenFile(filepath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, os.FileMode(644))
-	check.Check(e)
+	check(e)
 	_, err := file.WriteString(sentence + "\n")
-	check.Check(err)
+	check(err)
 	return file.Close()
 }
 
 func GetHomeDir() string {
 	usr, err := user.Current()
-	check.Check(err)
+	check(err)
 	return usr.HomeDir
 }
 
 func PrintRed(out io.Writer, message string) {
-	fmt.Fprint(out, string(ColorRed), message, string(ColorReset))
+	PrintWithColor(out, message, ColorRed)
 }
 
 func PrintGreen(out io.Writer, message string) {
-	fmt.Fprint(out, string(ColorGreen), message, string(ColorReset))
+	PrintWithColor(out, message, ColorGreen)
 }
 
 func PrintWithColor(out io.Writer, message, color string) {
 	fmt.Fprint(out, color, message, string(ColorReset))
+}
+
+func check(err error) {
+	if err != nil {
+		panic(err)
+	}
 }

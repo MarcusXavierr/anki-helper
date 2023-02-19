@@ -6,7 +6,6 @@ import (
 	"os"
 
 	"github.com/MarcusXavierr/anki-helper/pkg/IO"
-	"github.com/MarcusXavierr/anki-helper/pkg/check"
 	"github.com/MarcusXavierr/wiktionary-scraper/pkg/scraper"
 	"github.com/samber/lo"
 )
@@ -25,7 +24,10 @@ func Usage() {
 
 func WriteSentenceOnFile(sentence, filePath string) {
 	err := IO.WriteFile(sentence, filePath)
-	check.Check(err)
+
+	if err != nil {
+		panic(err)
+	}
 	message := fmt.Sprintf("Sentence %q added successfully\n", sentence)
 	IO.PrintGreen(os.Stdout, message)
 }

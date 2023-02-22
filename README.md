@@ -7,7 +7,14 @@ Track new words you learn in a foreign language and add them to Anki for further
 
 An example of usage is shown below:
 
-<img width="1049" alt="image" src="https://user-images.githubusercontent.com/59923581/219258940-86583cb9-6cc4-4cf0-af9e-b8e98472a540.png">
+### Get sentence definitions
+
+![definition](https://user-images.githubusercontent.com/59923581/220511647-44ac85d3-a1cc-4eef-ae78-114f41dc45b8.gif)
+<hr>
+
+### Add new sentences to further practice
+
+![add](https://user-images.githubusercontent.com/59923581/220512928-f4a311f8-256c-4af0-8e98-279b7775fb88.gif)
 
 ## Installation
 you can install this project with go
@@ -40,17 +47,16 @@ trash-file-path="/tmp/learned_sentences_file.txt"
 ```
 
 ## Usage
-You can run this command to add a word to your track file
+
+## Add word to further practice
+You can run this command to `add` a word to your track file
 
 ```bash
-anki-helper add word
+anki-helper add 'sentence'
 ```
-you can also use -d flag to get definition of this word
+## Get definition
+you can also use the command `dictionary` to get the definitions of a sentence (works for words and phrasal verbs)
 
 ```bash
-anki-helper add word -d
-
-#or
-
-anki-helper add -d word
+anki-helper dictionary 'sentence'
 ```

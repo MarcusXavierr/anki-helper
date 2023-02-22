@@ -12,6 +12,8 @@ import (
 	"github.com/charmbracelet/lipgloss"
 	"github.com/muesli/reflow/wordwrap"
 	"github.com/samber/lo"
+
+	"github.com/MarcusXavierr/anki-helper/internal/tui"
 )
 
 type viewPortModel struct {
@@ -26,7 +28,7 @@ type viewPortModel struct {
 var (
 	borderStyle = func() lipgloss.Style {
 		b := lipgloss.RoundedBorder()
-		return lipgloss.NewStyle().BorderStyle(b).Padding(0, 1)
+		return lipgloss.NewStyle().BorderStyle(b).Padding(0)
 	}()
 )
 
@@ -80,7 +82,7 @@ func (m viewPortModel) View() string {
 	}
 	helpView := m.help.View(m.keys)
 
-	header := lipgloss.NewStyle().Foreground(lipgloss.Color("86")).Bold(true).Render(fmt.Sprintf("The definition of the word %s", m.sentence))
+	header := header(m.sentence, tui.ColumbiaBlue)
 
 	return fmt.Sprintf("%s\n%s\n%s", header, m.viewport.View(), helpView)
 }
@@ -90,18 +92,18 @@ func (m viewPortModel) createContent() (content string) {
 		content += m.separator(item) + "\n"
 
 		for _, definition := range item.Definitions {
-			sla := ""
-			sla += "Definition: " + definition.WordDefinition
+			cardBody := ""
+			cardBody += "Definition: " + definition.WordDefinition
 
 			if len(definition.Examples) > 0 {
-				sla += "\n"
+				cardBody += "\n"
 			}
 
 			lo.ForEach(definition.Examples, func(example scraper.Example, _ int) {
-				sla += "\n" + "Example: " + wordwrap.String(string(example), m.viewport.Width-9)
+				cardBody += "\n" + "Example: " + wordwrap.String(styledExample(example), m.viewport.Width-9)
 			})
 
-			content += borderStyle.Render(sla) + "\n"
+			content += borderStyle.Render(cardBody) + "\n"
 		}
 	}
 
@@ -109,9 +111,20 @@ func (m viewPortModel) createContent() (content string) {
 }
 
 func (m viewPortModel) separator(usage scraper.Usage) string {
-	title := borderStyle.Render(usage.PartOfSpeech + " - " + usage.Language)
+	title := borderStyle.Copy().Foreground(tui.White).Background(tui.UltraViolet).Render(usage.PartOfSpeech + " - " + usage.Language)
 	line := strings.Repeat("-", max(0, m.viewport.Width-lipgloss.Width(title)))
 	return lipgloss.JoinHorizontal(lipgloss.Center, title, line)
+}
+
+func styledExample(example scraper.Example) string {
+	quotedExample := fmt.Sprintf("%q", string(example))
+	style := lipgloss.NewStyle().Italic(true)
+
+	return style.Render(quotedExample)
+}
+
+func header(sentence string, color lipgloss.Color) string {
+	return lipgloss.NewStyle().Foreground(color).Bold(true).Render(fmt.Sprintf("The definition of the word %q", sentence))
 }
 
 func max(a, b int) int {

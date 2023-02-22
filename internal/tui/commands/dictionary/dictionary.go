@@ -124,7 +124,7 @@ func styledExample(example scraper.Example) string {
 }
 
 func header(sentence string, color lipgloss.Color) string {
-	return lipgloss.NewStyle().Foreground(color).Bold(true).Render(fmt.Sprintf("The definition of the word %q", sentence))
+	return lipgloss.NewStyle().Foreground(color).Bold(true).Render(fmt.Sprintf("The definition of the sentence %q", sentence))
 }
 
 func max(a, b int) int {

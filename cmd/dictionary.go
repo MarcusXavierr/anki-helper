@@ -31,7 +31,8 @@ var dictionaryCmd = &cobra.Command{
 func doStuff(sentence string) {
 	res, err := api.GetDefinition("https://en.wiktionary.org/api/rest_v1/page/definition/", sentence)
 	if err != nil {
-		fmt.Println("was not possible to get the definition of this word")
+		IO.PrintRed(os.Stdout, "was not possible to get the definition of this word\n")
+		return
 	}
 
 	runTUI(res, sentence)

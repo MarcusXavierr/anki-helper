@@ -34,12 +34,15 @@ func TestInsertCard(t *testing.T) {
 func TestCreateStruct(t *testing.T) {
 	randomId, _ := uuid.NewV4()
 
-	card := CardData{Sentence: "mamaco", Example: "mamaco", Definition: "A cooler macaco", UUID: randomId}
-	got, err := makePayload(card)
-
-	if err != nil {
-		t.Fatal(err)
+	card := CardData{
+		Sentence:   "mamaco",
+		Example:    "mamaco",
+		Definition: "A cooler macaco",
+		UUID:       randomId,
+		DeckName:   "Padrão",
+		ModelName:  "Basic",
 	}
+	got := makePayload(card)
 	want := addNoteRequest{
 		Action:  "addNote",
 		Version: 6,

@@ -10,12 +10,12 @@ import (
 )
 
 type CardData struct {
-	Sentence, Example, Definition string
-	UUID                          uuid.UUID
+	Sentence, Example, Definition, DeckName, ModelName string
+	UUID                                               uuid.UUID
 }
 
 func (c CardData) InsertCard(url string) error {
-	requestBody, err := json.Marshal(c.Example)
+	requestBody, err := json.Marshal(makePayload(c))
 
 	if err != nil {
 		return err
@@ -30,10 +30,6 @@ func (c CardData) InsertCard(url string) error {
 	defer response.Body.Close()
 
 	return validateReponse(response)
-}
-
-func makePayload(c CardData) (addNoteRequest, error) {
-	return addNoteRequest{}, nil
 }
 
 func validateReponse(response *http.Response) error {

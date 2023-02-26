@@ -1,8 +1,6 @@
 package IO
 
 import (
-	"fmt"
-	"io"
 	"io/fs"
 	"os"
 	"os/user"
@@ -44,24 +42,6 @@ func GetHomeDir() string {
 	usr, err := user.Current()
 	check(err)
 	return usr.HomeDir
-}
-
-func PrintRed(out io.Writer, message string) {
-	PrintWithColor(out, message, ColorRed)
-}
-
-func PrintGreen(out io.Writer, message string) {
-	PrintWithColor(out, message, ColorGreen)
-}
-
-func PrintWithColor(out io.Writer, message, color string) {
-	fmt.Fprint(out, color, message, string(ColorReset))
-}
-
-func check(err error) {
-	if err != nil {
-		panic(err)
-	}
 }
 
 func GetWords(fsys fs.FS, filename string, numberOfLines int) ([]string, error) {

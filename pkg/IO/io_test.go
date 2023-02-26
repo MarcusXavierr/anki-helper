@@ -55,7 +55,7 @@ func TestDeleteSentenceFromFile(t *testing.T) {
 	}
 
 	got := string(content)
-	want := "hi\nmy\nis\nmarcus"
+	want := "hi\nmy\nis\nmarcus\n"
 
 	if got != want {
 		t.Errorf("expected %s but got %s", want, got)
@@ -66,7 +66,7 @@ func assertArray(got []string, want []string, t *testing.T) {
 	t.Helper()
 
 	if !reflect.DeepEqual(got, want) {
-		t.Errorf("expected %q but got %q", want, got)
+		t.Errorf("expected %v but got %v", want, got)
 	}
 }
 

@@ -81,7 +81,7 @@ func FilterSentenceFromFile(fsys fs.FS, filePath string, searchString string) ([
 	}
 
 	newContentStr := strings.Join(newContent, "\n")
-	return []byte(newContentStr), nil
+	return []byte(newContentStr + "\n"), nil
 }
 
 func removeBlankLineFromEnd(lines []string) []string {

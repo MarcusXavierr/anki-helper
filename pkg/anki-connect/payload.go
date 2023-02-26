@@ -12,8 +12,8 @@ func makePayload(c CardData) addNoteRequest {
 				DeckName:  c.DeckName,
 				ModelName: c.ModelName,
 				Fields: noteFields{
-					Front: "mamaco",
-					Back:  "A cooler macaco",
+					Front: c.Example,
+					Back:  fmt.Sprintf("%s: %s", c.Sentence, c.Definition),
 				},
 				Audio: []noteAudio{
 					{

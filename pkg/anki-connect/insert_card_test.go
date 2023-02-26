@@ -52,7 +52,7 @@ func TestCreateStruct(t *testing.T) {
 				ModelName: "Basic",
 				Fields: noteFields{
 					Front: "mamaco",
-					Back:  "A cooler macaco",
+					Back:  "mamaco: A cooler macaco",
 				},
 				Audio: []noteAudio{
 					{

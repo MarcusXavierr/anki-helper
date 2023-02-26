@@ -63,13 +63,6 @@ func GetWords(fsys fs.FS, filename string, numberOfLines int) ([]string, error) 
 
 }
 
-func removeBlankLineFromEnd(lines []string) []string {
-	if len(lines) > 0 && lines[len(lines)-1] == "" {
-		lines = lines[:len(lines)-1]
-	}
-	return lines
-}
-
 func FilterSentenceFromFile(fsys fs.FS, filePath string, searchString string) ([]byte, error) {
 	content, err := fs.ReadFile(fsys, filePath)
 	if err != nil {
@@ -89,4 +82,11 @@ func FilterSentenceFromFile(fsys fs.FS, filePath string, searchString string) ([
 
 	newContentStr := strings.Join(newContent, "\n")
 	return []byte(newContentStr), nil
+}
+
+func removeBlankLineFromEnd(lines []string) []string {
+	if len(lines) > 0 && lines[len(lines)-1] == "" {
+		lines = lines[:len(lines)-1]
+	}
+	return lines
 }

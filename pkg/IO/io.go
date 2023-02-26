@@ -89,3 +89,24 @@ func removeBlankLineFromEnd(lines []string) []string {
 	}
 	return lines
 }
+
+func FilterSentenceFromFile(fsys fs.FS, filePath string, searchString string) ([]byte, error) {
+	content, err := fs.ReadFile(fsys, filePath)
+	if err != nil {
+		return []byte{}, err
+	}
+
+	lines := strings.Split(string(content), "\n")
+	var found bool
+	var newContent []string
+	for _, line := range lines {
+		if strings.Contains(line, searchString) && !found {
+			found = true
+			continue
+		}
+		newContent = append(newContent, line)
+	}
+
+	newContentStr := strings.Join(newContent, "\n")
+	return []byte(newContentStr), nil
+}

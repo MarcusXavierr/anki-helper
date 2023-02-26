@@ -75,6 +75,25 @@ func TestGetWords(t *testing.T) {
 	})
 }
 
+func TestDeleteSentenceFromFile(t *testing.T) {
+	fs := fstest.MapFS{
+		"english_words.txt": {Data: []byte("hi\nmy\nname\nis\nmarcus")},
+	}
+
+	content, err := FilterSentenceFromFile(fs, "english_words.txt", "name")
+
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	got := string(content)
+	want := "hi\nmy\nis\nmarcus"
+
+	if got != want {
+		t.Errorf("expected %s but got %s", want, got)
+	}
+}
+
 func assertArray(got []string, want []string, t *testing.T) {
 	t.Helper()
 

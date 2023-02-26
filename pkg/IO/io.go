@@ -3,8 +3,10 @@ package IO
 import (
 	"fmt"
 	"io"
+	"io/fs"
 	"os"
 	"os/user"
+	"strings"
 )
 
 const (
@@ -60,4 +62,30 @@ func check(err error) {
 	if err != nil {
 		panic(err)
 	}
+}
+
+func GetWords(fsys fs.FS, filename string, numberOfLines int) ([]string, error) {
+	file, err := fs.ReadFile(fsys, filename)
+
+	if err != nil {
+		return []string{}, err
+	}
+
+	lines := strings.Split(string(file), "\n")
+
+	lines = removeBlankLineFromEnd(lines)
+
+	if numberOfLines > len(lines) {
+		numberOfLines = len(lines)
+	}
+
+	return lines[:numberOfLines], nil
+
+}
+
+func removeBlankLineFromEnd(lines []string) []string {
+	if len(lines) > 0 && lines[len(lines)-1] == "" {
+		lines = lines[:len(lines)-1]
+	}
+	return lines
 }

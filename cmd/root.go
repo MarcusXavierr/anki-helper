@@ -30,7 +30,7 @@ func Execute() {
 
 func init() {
 	write := utils.UserFilePath{WriteFile: "", TrashFile: ""}
-	rootCmd.AddCommand(dictionaryCmd, NewAddCmd(write), NewAnki(write))
+	rootCmd.AddCommand(dictionaryCmd, NewAddCmd(write), NewAnkiInsert(write))
 }
 
 func initializeConfig(cmd *cobra.Command) error {

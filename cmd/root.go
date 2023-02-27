@@ -1,13 +1,14 @@
-/*
-Copyright © 2022 NAME HERE <EMAIL ADDRESS>
-
-*/
 package cmd
 
 import (
+	"fmt"
 	"os"
 
+	"github.com/MarcusXavierr/anki-helper/internal/utils"
+	"github.com/MarcusXavierr/anki-helper/pkg/IO"
 	"github.com/spf13/cobra"
+	"github.com/spf13/pflag"
+	"github.com/spf13/viper"
 )
 
 // rootCmd represents the base command when called without any subcommands
@@ -15,13 +16,11 @@ var rootCmd = &cobra.Command{
 	Use: "anki-helper",
 	Long: `anki helper is a CLI focused on helping you to save the new words you learn in a language.
 And then you can save those words in your anki`,
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
-	// Run: func(cmd *cobra.Command, args []string) { },
+	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
+		return initializeConfig(cmd)
+	},
 }
 
-// Execute adds all child commands to the root command and sets flags appropriately.
-// This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
 	err := rootCmd.Execute()
 	if err != nil {
@@ -30,5 +29,35 @@ func Execute() {
 }
 
 func init() {
-	rootCmd.AddCommand(dictionaryCmd)
+	write := utils.UserFilePath{WriteFile: "", TrashFile: ""}
+	rootCmd.AddCommand(dictionaryCmd, NewAddCmd(write), NewAnki(write))
+}
+
+func initializeConfig(cmd *cobra.Command) error {
+	v := viper.New()
+
+	v.SetConfigName(defaultConfigFilename)
+
+	v.AddConfigPath(IO.GetHomeDir())
+
+	if err := v.ReadInConfig(); err != nil {
+		if _, ok := err.(viper.ConfigFileNotFoundError); !ok {
+			return err
+		}
+	}
+
+	bindFlags(cmd, v)
+	return nil
+}
+
+func bindFlags(cmd *cobra.Command, v *viper.Viper) {
+	cmd.Flags().VisitAll(func(flag *pflag.Flag) {
+		configName := flag.Name
+
+		if !flag.Changed && v.IsSet(configName) {
+			val := v.Get(configName)
+			cmd.Flags().Set(flag.Name, fmt.Sprintf("%v", val))
+		}
+	})
+
 }

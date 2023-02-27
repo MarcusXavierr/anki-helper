@@ -1,7 +1,3 @@
-/*
-Copyright © 2022 NAME HERE <EMAIL ADDRESS>
-
-*/
 package cmd
 
 import (
@@ -12,16 +8,13 @@ import (
 	"github.com/MarcusXavierr/anki-helper/pkg/IO"
 	"github.com/MarcusXavierr/anki-helper/pkg/sentenceCheck"
 	"github.com/spf13/cobra"
-	"github.com/spf13/pflag"
-	"github.com/spf13/viper"
 
 	"github.com/MarcusXavierr/wiktionary-scraper/pkg/api"
 )
 
 const defaultConfigFilename = ".anki-config"
 
-func NewAddCmd() *cobra.Command {
-	write := utils.UserFilePath{WriteFile: "", TrashFile: ""}
+func NewAddCmd(write utils.UserFilePath) *cobra.Command {
 
 	addCmd := &cobra.Command{
 		Use:   "add [sentence]",
@@ -29,16 +22,13 @@ func NewAddCmd() *cobra.Command {
 		Run: func(cmd *cobra.Command, args []string) {
 			saveSentenceAndPrintDefinition(cmd, args, write)
 		},
-		PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
-			return initializeConfig(cmd)
-		},
 	}
 
 	defaultNewWordsPath := fmt.Sprintf("%s/english_words/words.txt", IO.GetHomeDir())
 	defaultTrashPath := fmt.Sprintf("%s/english_words/trash.txt", IO.GetHomeDir())
 
-	addCmd.Flags().StringVarP(&write.WriteFile, "new-words-file-path", "n", defaultNewWordsPath, "só um teste")
-	addCmd.Flags().StringVarP(&write.TrashFile, "trash-file-path", "t", defaultTrashPath, "só um teste trash")
+	addCmd.Flags().StringVarP(&write.WriteFile, "new-words-file-path", "n", defaultNewWordsPath, "path to new words file")
+	addCmd.Flags().StringVarP(&write.TrashFile, "trash-file-path", "t", defaultTrashPath, "path to learned words file")
 	return addCmd
 }
 
@@ -80,8 +70,8 @@ func getFiles(userFiles utils.UserFilePath) (IO.File, IO.File) {
 }
 
 func init() {
-	rootCmd.AddCommand(NewAddCmd())
-	rootCmd.PersistentFlags().BoolP("definition", "d", false, "")
+	// rootCmd.AddCommand(NewAddCmd())
+	// rootCmd.PersistentFlags().BoolP("definition", "d", false, "")
 }
 
 func getSentenceFromArgs(args []string) string {
@@ -91,33 +81,4 @@ func getSentenceFromArgs(args []string) string {
 	}
 	sentence := args[0]
 	return sentence
-}
-
-func initializeConfig(cmd *cobra.Command) error {
-	v := viper.New()
-
-	v.SetConfigName(defaultConfigFilename)
-
-	v.AddConfigPath(IO.GetHomeDir())
-
-	if err := v.ReadInConfig(); err != nil {
-		if _, ok := err.(viper.ConfigFileNotFoundError); !ok {
-			return err
-		}
-	}
-
-	bindFlags(cmd, v)
-	return nil
-}
-
-func bindFlags(cmd *cobra.Command, v *viper.Viper) {
-	cmd.Flags().VisitAll(func(flag *pflag.Flag) {
-		configName := flag.Name
-
-		if !flag.Changed && v.IsSet(configName) {
-			val := v.Get(configName)
-			cmd.Flags().Set(flag.Name, fmt.Sprintf("%v", val))
-		}
-	})
-
 }

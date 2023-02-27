@@ -57,13 +57,13 @@ trash-file-path="/tmp/learned_sentences_file.txt"
 
 ## Usage
 
-## Add word to further practice
+### Add word to further practice
 You can run this command to `add` a word to your track file
 
 ```bash
 anki-helper add 'sentence'
 ```
-## Get definition
+### Get definition
 you can also use the command `dictionary` to get the definitions of a sentence (works for words and phrasal verbs)
 
 ```bash

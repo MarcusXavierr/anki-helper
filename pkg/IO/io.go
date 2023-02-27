@@ -84,6 +84,20 @@ func FilterSentenceFromFile(fsys fs.FS, filePath string, searchString string) ([
 	return []byte(newContentStr + "\n"), nil
 }
 
+func OverrideFile(data []byte, filepath string) error {
+	file, err := os.OpenFile(filepath, os.O_WRONLY, os.FileMode(644))
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+	_, err = file.Write(data)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func removeBlankLineFromEnd(lines []string) []string {
 	if len(lines) > 0 && lines[len(lines)-1] == "" {
 		lines = lines[:len(lines)-1]

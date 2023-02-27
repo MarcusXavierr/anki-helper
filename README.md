@@ -1,3 +1,5 @@
+<section align="center">
+
 # Anki Helper
 [![Go Report Card](https://goreportcard.com/badge/github.com/MarcusXavierr/anki-helper)](https://goreportcard.com/report/github.com/MarcusXavierr/anki-helper)
 ![example workflow](https://github.com/MarcusXavierr/anki-helper/actions/workflows/go.yml/badge.svg)
@@ -5,7 +7,14 @@
 <br/>
 Track new words you learn in a foreign language and add them to Anki for further practice and memorization. 
 
-An example of usage is shown below:
+[Getting started](#getting-started) •
+[Installation](#installation) •
+[Configuration](#configuration) •
+[Usage](#usage)
+
+</section>
+
+## Getting Started
 
 ### Get sentence definitions
 

@@ -2,8 +2,10 @@ package IO
 
 import (
 	"io/fs"
+	"io/ioutil"
 	"os"
 	"os/user"
+	"path/filepath"
 	"strings"
 )
 
@@ -63,6 +65,28 @@ func GetWords(fsys fs.FS, filename string, numberOfLines int) ([]string, error) 
 
 }
 
+func MoveSentenceToTrash(trashPath, wordsPath, sentence string) error {
+	err := DeleteSentenceFromFile(wordsPath, sentence)
+
+	if err != nil {
+		return err
+	}
+
+	return WriteFile(sentence, trashPath)
+}
+
+func DeleteSentenceFromFile(filePath, searchString string) error {
+	dir, path := filepath.Split(filePath)
+
+	newContent, err := FilterSentenceFromFile(os.DirFS(dir), path, searchString)
+
+	if err != nil {
+		return err
+	}
+
+	return OverrideFile(newContent, filePath)
+}
+
 func FilterSentenceFromFile(fsys fs.FS, filePath string, searchString string) ([]byte, error) {
 	content, err := fs.ReadFile(fsys, filePath)
 	if err != nil {
@@ -85,16 +109,10 @@ func FilterSentenceFromFile(fsys fs.FS, filePath string, searchString string) ([
 }
 
 func OverrideFile(data []byte, filepath string) error {
-	file, err := os.OpenFile(filepath, os.O_WRONLY, os.FileMode(644))
+	err := ioutil.WriteFile(filepath, data, 0644)
 	if err != nil {
 		return err
 	}
-	defer file.Close()
-	_, err = file.Write(data)
-	if err != nil {
-		return err
-	}
-
 	return nil
 }
 

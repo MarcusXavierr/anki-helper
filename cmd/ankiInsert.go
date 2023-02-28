@@ -47,5 +47,8 @@ to quickly create a Cobra application.`,
 	ankiInsertCmd.Flags().StringVarP(&write.WriteFile, "new-words-file-path", "n", defaultNewWordsPath, "path to new words file")
 	ankiInsertCmd.Flags().StringVarP(&write.TrashFile, "trash-file-path", "t", defaultTrashPath, "path to learned words file")
 
+	ankiInsertCmd.Flags().StringVar(&config.DeckName, "deck-name", "", "Name of your anki deck")
+	ankiInsertCmd.Flags().StringVar(&config.ModelName, "model-name", "", "your anki model (first you need to create one)")
+
 	return ankiInsertCmd
 }

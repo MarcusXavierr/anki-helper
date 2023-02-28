@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/MarcusXavierr/anki-helper/internal/tui"
 	"github.com/MarcusXavierr/anki-helper/internal/utils"
 	"github.com/MarcusXavierr/anki-helper/pkg/IO"
 	"github.com/spf13/cobra"
@@ -30,7 +31,8 @@ func Execute() {
 
 func init() {
 	write := utils.UserFilePath{WriteFile: "", TrashFile: ""}
-	rootCmd.AddCommand(dictionaryCmd, NewAddCmd(write), NewAnkiInsert(write))
+	ankiConfig := tui.AnkiConfig{DeckName: "", ModelName: ""}
+	rootCmd.AddCommand(dictionaryCmd, NewAddCmd(write), NewAnkiInsert(write, ankiConfig))
 }
 
 func initializeConfig(cmd *cobra.Command) error {

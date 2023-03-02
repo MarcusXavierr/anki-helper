@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/MarcusXavierr/anki-helper/internal/tui"
 	"github.com/MarcusXavierr/anki-helper/internal/utils"
 	"github.com/MarcusXavierr/anki-helper/pkg/IO"
+	ankiconnect "github.com/MarcusXavierr/anki-helper/pkg/anki-connect"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
@@ -31,7 +31,7 @@ func Execute() {
 
 func init() {
 	write := utils.UserFilePath{WriteFile: "", TrashFile: ""}
-	ankiConfig := tui.AnkiConfig{DeckName: "", ModelName: ""}
+	ankiConfig := ankiconnect.AnkiConfig{DeckName: "", ModelName: ""}
 	rootCmd.AddCommand(dictionaryCmd, NewAddCmd(write), NewAnkiInsert(write, ankiConfig))
 }
 

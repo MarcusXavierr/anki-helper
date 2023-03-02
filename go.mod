@@ -3,7 +3,7 @@ module github.com/MarcusXavierr/anki-helper
 go 1.18
 
 require (
-	github.com/MarcusXavierr/wiktionary-scraper v0.0.0-20230216010527-4ce3e6551420
+	github.com/MarcusXavierr/wiktionary-scraper v0.0.0-20230226023942-0d45cfd57731
 	github.com/approvals/go-approval-tests v0.0.0-20220530063708-32d5677069bd
 	github.com/charmbracelet/bubbles v0.15.0
 	github.com/charmbracelet/bubbletea v0.23.2
@@ -17,6 +17,7 @@ require (
 )
 
 require (
+	github.com/atotto/clipboard v0.1.4 // indirect
 	github.com/aymanbagabas/go-osc52 v1.2.1 // indirect
 	github.com/containerd/console v1.0.3 // indirect
 	github.com/ettle/strcase v0.1.1 // indirect
@@ -35,6 +36,7 @@ require (
 	github.com/pelletier/go-toml v1.9.5 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.1 // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
+	github.com/sahilm/fuzzy v0.1.0 // indirect
 	github.com/spf13/afero v1.8.2 // indirect
 	github.com/spf13/cast v1.5.0 // indirect
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect

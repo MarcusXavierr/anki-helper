@@ -14,7 +14,7 @@ import (
 
 const defaultConfigFilename = ".anki-config"
 
-func NewAddCmd(write utils.UserFilePath) *cobra.Command {
+func NewAddCmd(write IO.UserFilePath) *cobra.Command {
 
 	addCmd := &cobra.Command{
 		Use:   "add [sentence]",
@@ -32,7 +32,7 @@ func NewAddCmd(write utils.UserFilePath) *cobra.Command {
 	return addCmd
 }
 
-func saveSentenceAndPrintDefinition(cmd *cobra.Command, args []string, userFiles utils.UserFilePath) {
+func saveSentenceAndPrintDefinition(cmd *cobra.Command, args []string, userFiles IO.UserFilePath) {
 	definition, _ := cmd.Flags().GetBool("definition")
 	sentence := getSentenceFromArgs(args)
 
@@ -55,7 +55,7 @@ func printWiktionaryDefinition(sentence string) {
 	}
 }
 
-func saveSentence(sentence string, userFiles utils.UserFilePath) {
+func saveSentence(sentence string, userFiles IO.UserFilePath) {
 	wordsTrackerFile, trash := getFiles(userFiles)
 
 	if !sentenceCheck.CheckIfSentenceExists(os.Stdout, sentence, wordsTrackerFile, trash) {
@@ -63,7 +63,7 @@ func saveSentence(sentence string, userFiles utils.UserFilePath) {
 	}
 }
 
-func getFiles(userFiles utils.UserFilePath) (IO.File, IO.File) {
+func getFiles(userFiles IO.UserFilePath) (IO.File, IO.File) {
 	wordsTrackerFile := IO.File{FilePath: userFiles.WriteFile}
 	trash := IO.File{FilePath: userFiles.TrashFile}
 	return wordsTrackerFile, trash

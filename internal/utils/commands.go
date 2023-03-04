@@ -10,11 +10,6 @@ import (
 	"github.com/samber/lo"
 )
 
-type UserFilePath struct {
-	WriteFile string
-	TrashFile string
-}
-
 func Usage() {
 	var message string = fmt.Sprintf("usage: %s \"sentence to add\"\n", os.Args[0])
 	IO.PrintRed(os.Stdout, message)

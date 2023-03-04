@@ -18,6 +18,11 @@ const (
 	ColorGold  = "\033[38;2;243;134;48m"
 )
 
+type UserFilePath struct {
+	WriteFile string
+	TrashFile string
+}
+
 type File struct {
 	FilePath string
 }

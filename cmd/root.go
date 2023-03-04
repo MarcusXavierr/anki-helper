@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/MarcusXavierr/anki-helper/internal/utils"
 	"github.com/MarcusXavierr/anki-helper/pkg/IO"
 	ankiconnect "github.com/MarcusXavierr/anki-helper/pkg/anki-connect"
 	"github.com/spf13/cobra"
@@ -30,7 +29,7 @@ func Execute() {
 }
 
 func init() {
-	write := utils.UserFilePath{WriteFile: "", TrashFile: ""}
+	write := IO.UserFilePath{WriteFile: "", TrashFile: ""}
 	ankiConfig := ankiconnect.AnkiConfig{DeckName: "", ModelName: ""}
 	rootCmd.AddCommand(dictionaryCmd, NewAddCmd(write), NewAnkiInsert(write, ankiConfig))
 }

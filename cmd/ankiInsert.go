@@ -5,13 +5,15 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/MarcusXavierr/anki-helper/internal/utils"
+	ankiinsert "github.com/MarcusXavierr/anki-helper/internal/tui/commands/anki_insert"
 	"github.com/MarcusXavierr/anki-helper/pkg/IO"
+	ankiconnect "github.com/MarcusXavierr/anki-helper/pkg/anki-connect"
+	tea "github.com/charmbracelet/bubbletea"
 	"github.com/spf13/cobra"
 )
 
 // ankiInsertCmd represents the ankiInsert command
-func NewAnkiInsert(write utils.UserFilePath) *cobra.Command {
+func NewAnkiInsert(write IO.UserFilePath, config ankiconnect.AnkiConfig) *cobra.Command {
 	ankiInsertCmd := &cobra.Command{
 		Use:   "ankiInsert",
 		Short: "A brief description of your command",

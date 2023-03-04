@@ -19,8 +19,9 @@ const (
 )
 
 type UserFilePath struct {
-	WriteFile string
-	TrashFile string
+	WriteFile        string
+	ManualInsertFile string
+	TrashFile        string
 }
 
 type File struct {
@@ -70,7 +71,7 @@ func GetWords(fsys fs.FS, filename string, numberOfLines int) ([]string, error) 
 
 }
 
-func MoveSentenceToTrash(trashPath, wordsPath, sentence string) error {
+func MoveSentenceToFile(trashPath, wordsPath, sentence string) error {
 	err := DeleteSentenceFromFile(wordsPath, sentence)
 
 	if err != nil {

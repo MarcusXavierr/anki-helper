@@ -18,13 +18,8 @@ func (m model) Init() tea.Cmd {
 }
 
 func (m model) View() string {
-	// tá feio, pode firar func sla
-	if m.error == theresNoCards {
-		m.list.Title += " - Could not find examples"
-	} else if m.error == emptyListPop {
-		return "Good bye!!\nPress q or space to escape\n"
-	} else if m.error != nil {
-		return docStyle.Render("there was an error, press 'space' to continue " + m.error.Error())
+	if m.error != nil {
+		return handleViewError(m)
 	}
 
 	if m.isLoading {

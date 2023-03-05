@@ -36,3 +36,16 @@ func makeSpinner() spinner.Model {
 	spin.Style = lipgloss.NewStyle().Foreground(lipgloss.Color("205"))
 	return spin
 }
+
+func handleViewError(m model) string {
+	if m.error == theresNoCards {
+		m.list.Title += " - Could not find examples"
+		return docStyle.Render(m.list.View())
+	}
+
+	if m.error == emptyListPop {
+		return "Good bye!!\nPress q or space to escape\n"
+	}
+
+	return docStyle.Render("there was an error, press 'space' to continue " + m.error.Error())
+}

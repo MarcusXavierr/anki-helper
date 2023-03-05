@@ -53,15 +53,12 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		m.list.SetSize(msg.Width-h, msg.Height-v)
 
 	case insertMsg:
-		//Ok, como eu faço agr? Eu crio mais uma msg pra botar pra mimir (ou uso uma que tem), dps crio um comando que insere no anki, trata erro, move palavra de arquivo, e retorna uma msg falando oq deu (podendo escrever no error do model, sla). E por fim, mando um comando que finaliza o loading da lista
-		// cmd := m.list.StartSpinner()
 		return m, tea.Sequence(makeStartLoadMsg(), makeStopLoadMsg(msg.item))
 	case startLoadMsg:
 		m.isLoading = true
 		return m, spinner.Tick
 
 	case stopLoadMsg:
-		// pode virar func
 		err := msg.item.card.InsertCard("http://localhost:8765")
 		if err == nil {
 			err = IO.MoveSentenceToFile(m.userFiles.TrashFile, m.userFiles.WriteFile, msg.item.card.Sentence)

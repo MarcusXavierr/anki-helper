@@ -16,6 +16,10 @@ Track new words you learn in a foreign language and add them to Anki for further
 
 ## Getting Started
 
+### Insert flashcards on anki
+
+https://user-images.githubusercontent.com/59923581/222997612-ba367d28-f2aa-47dd-9b8e-51c83dac1b56.mp4
+
 ### Get sentence definitions
 
 ![definition](https://user-images.githubusercontent.com/59923581/220511647-44ac85d3-a1cc-4eef-ae78-114f41dc45b8.gif)

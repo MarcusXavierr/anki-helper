@@ -41,7 +41,7 @@ You can also install a compiled binary to your machine and then put it in your s
 
 Go to the [releases page](https://github.com/MarcusXavierr/anki-helper/releases) and choose the option that best fits your environment.
 
-## Getting Startd
+## Getting Started
 To get started, visit the [project's wiki](https://github.com/MarcusXavierr/anki-helper/wiki). There you will find instructions on how to set up your Anki and how to configure Anki-helper, in a simple and fast way.
 
 ## Usage

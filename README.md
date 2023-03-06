@@ -61,6 +61,16 @@ trash-file-path="/tmp/learned_sentences_file.txt"
 
 ## Usage
 
+### Insert flashcards on anki
+You can easilly insert flashcards on anki using anki-helper.
+```bash
+anki-helper ankiInsert
+
+# Or if you want to specify how many flashcards you wanna insert on anki, use the -i flag
+
+anki-helper ankiInsert -i 10
+```
+
 ### Add word to further practice
 You can run this command to `add` a word to your track file
 

@@ -5,7 +5,10 @@
 ![example workflow](https://github.com/MarcusXavierr/anki-helper/actions/workflows/go.yml/badge.svg)
 
 <br/>
-Track new words you learn in a foreign language and add them to Anki for further practice and memorization. 
+Anki Helper is a simple command line tool that can help you learn and memorize new words and phrases using Anki.
+With just a few simple steps, you can set up Anki Helper to automatically create flashcards from new words you encounter while reading or listening to English. 
+
+These flashcards will then be added to your Anki deck for review later. New languages will be supported soon
 
 [Usage Examples](#usage-examples) •
 [Installation](#installation) •

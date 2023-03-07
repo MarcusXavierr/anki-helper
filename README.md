@@ -23,7 +23,7 @@ These flashcards will then be added to your Anki deck for review later. New lang
 
 ### Insert flashcards on anki
 
-https://user-images.githubusercontent.com/59923581/222997612-ba367d28-f2aa-47dd-9b8e-51c83dac1b56.mp4
+https://user-images.githubusercontent.com/59923581/223573058-cb580c40-e556-45ce-9f58-001bfbdc7342.mp4
 
 ### Get sentence definitions
 

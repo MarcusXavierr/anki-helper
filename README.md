@@ -1,6 +1,8 @@
 <section align="center">
 
 # Anki Helper
+![gopher](https://user-images.githubusercontent.com/59923581/223569450-e039400f-4ede-4171-8e6e-ee4252cfb15b.gif)
+
 [![Go Report Card](https://goreportcard.com/badge/github.com/MarcusXavierr/anki-helper)](https://goreportcard.com/report/github.com/MarcusXavierr/anki-helper)
 ![example workflow](https://github.com/MarcusXavierr/anki-helper/actions/workflows/go.yml/badge.svg)
 
